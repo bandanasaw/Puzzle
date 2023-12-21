@@ -9,6 +9,7 @@ window.onload = function () {
   for (let i = 0; i < rows * columns; i++) {
     const div = document.createElement("div");
     div.dataset.image = i + 1;
+    div.setAttribute('data-id','file')
     // div.setAttribute('idd', i);
     // div.addEventListener("dragstart", dragStart);
     div.addEventListener("dragover", dragOver);
@@ -45,7 +46,8 @@ window.onload = function () {
   for (let i = 0; i < pieces.length; i++) {
     let img = document.createElement("img");
     img.dataset.image = pieces[i];
-    img.src = "../imgs/" + pieces[i] + ".jpg";
+    img.setAttribute('data-id','file')
+    img.src = "../img/" + pieces[i] + ".jpg";
 
     img.setAttribute("id", pieces[i]);
     img.addEventListener("dragstart", dragStart);
@@ -60,6 +62,8 @@ function dragStart(event) {
   paragraph.classList.add("hide");
 
   event.dataTransfer.setData("text/plain", event.target.id);
+  event.target.classList.add("ds_awaiting_file");
+
 }
 
 function dragOver(e) {
@@ -74,7 +78,9 @@ function dragDrop(event) {
   const droppedItemId = event.dataTransfer.getData("text/plain");
   const droppedItem = document.getElementById(droppedItemId);
 
+  console.log(event.target.dataset.image ,droppedItemId);
   if (droppedItemId == event.target.dataset.image) {
+    event.dataTransfer.dropEffect = "move";
     event.target.appendChild(droppedItem);
 
     setTimeout(() => {
@@ -97,6 +103,7 @@ function dragEnd(event) {
   event.preventDefault();
 
   checkPuzzleCompletion();
+  event.target.classList.remove("ds_awaiting_file");
 }
 
 function checkPuzzleCompletion() {
