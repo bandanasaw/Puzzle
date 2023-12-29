@@ -1,23 +1,14 @@
 body {
-    /* text-align: center; */
+
     background-color: black;
-    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* #board {
-    width: 396px;
-    height: 400px;
-    border: 2px solid black;
-
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-} */
 p {
+    position: absolute;
     color: white;
 }
 
@@ -26,11 +17,8 @@ p {
 }
 
 #pieces {
-
     width: 100%;
     gap: 5px;
-    /* margin-top: 50px;
-    height: 160px; */
     margin-top: 20px;
     height: 100px;
     display: flex;
@@ -42,8 +30,14 @@ p {
     width: 198px;
     height: 132px;
     flex-wrap: wrap;
-    cursor: crosshair;
-    /* border: 0.5px solid lightblue; */
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+
+#pieces img:active {
+
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
 }
 
 
@@ -51,7 +45,6 @@ p {
 
     width: 400px;
     height: 400px;
-    /* background-size: 334px; */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -59,26 +52,22 @@ p {
     background-image: url('../imgs/background-logo.png');
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    /* margin-left: 408px; */
 
 }
 
 div {
     width: 200px;
     height: 133px;
-    /* border: 0.5px solid lightblue; */
 }
 
 .grid-container div {
-    /* border: 1px solid lightgray; */
+    /* border: 1px solid gray; */
     width: 200px;
     height: 133px;
     position: relative;
 }
 
-
 .grid-container img {
-    /* width: 198px; */
     width: 200px;
     height: 133px;
 
@@ -87,7 +76,6 @@ div {
 .container {
     width: 400px;
     height: 400px;
-    /* border: 1px solid red; */
 
 }
 
@@ -120,12 +108,61 @@ div {
     width: 437px;
     justify-content: center;
     display: flex;
-    background-image: url('../imgs/error.svg');
+    /* background-image: url('../imgs/error.svg'); */
     background-size: cover;
-
     transform: rotateY(180deg);
+
 }
 
+.main-container {
+    /* border: 1px solid; */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    display: inline-flex
+}
+
+.text404-container {
+    text-align: right;
+    color: white;
+    font-size: 127px;
+    font-family: Inter;
+    font-weight: 600;
+    letter-spacing: 3px;
+
+}
+
+.pageNotFound {
+
+    text-align: right;
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 31px;
+    font-family: Inter;
+    font-weight: 300;
+    line-height: 49.50px;
+    letter-spacing: 0.66px;
+    word-wrap: break-word;
+}
+
+.content {
+    width: 369px;
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-family: Inter;
+    font-weight: 300;
+    line-height: 33px;
+    margin-left: -83px;
+    letter-spacing: 0.44px;
+    margin-top: 20px;
+    word-wrap: break-word;
+}
+
+.image-container {
+    justify-content: center;
+    display: flex;
+    margin-top: 50px;
+}
 
 #pieces img.completed {
     opacity: 0.5;
@@ -133,21 +170,90 @@ div {
 
 .grid-container .goodMessage {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     bottom: 0;
     margin-left: -150px;
 }
 
+.pieceShake:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+}
 
-[data-id=file] *
-{
-  pointer-events: none;
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
 }
 
 
-.ds_awaiting_file
-{
-    opacity: 1;
+.img-rotate {
+    width: 300px;
+    animation: rotation 6s infinite linear;
 }
 
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 
+.drag-me {
+    @include grab-cursor;
+    @include transition(transform .2s, box-shadow .2s);
+}
+
+.drag-me:hover {
+    @include scale(1.03);
+}
+
+.drag-me:active {
+    @include grabbing-cursor;
+    @include scale(1.1);
+} */
